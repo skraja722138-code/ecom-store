@@ -48,7 +48,9 @@ function saveProducts(productsToSave) {
 function getStoredProducts() {
   try {
     const raw = localStorage.getItem('martnowProducts');
-    return raw ? JSON.parse(raw) : null;
+    const parsed = raw ? JSON.parse(raw) : null;
+    if (Array.isArray(parsed) && parsed.length === 0) return null;
+    return parsed;
   } catch (error) {
     return null;
   }
