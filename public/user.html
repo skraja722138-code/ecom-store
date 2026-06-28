@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MartNow | Shop</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/">MartNow</a>
+      <a class="brand" href="./index.html">MartNow</a>
       <nav class="main-nav">
         <a href="#offers">Offers</a>
         <a href="#categories">Categories</a>
@@ -34,57 +34,9 @@
         </div>
       </div>
       <div class="hero-image">
-        <img src="/assets/images/new-animated-banner.gif" alt="Exciting Products" class="hero-image" />
+        <img src="./hero-banner.svg" alt="Exciting Products" class="hero-image" />
       </div>
     </section>
-
-    <style>
-      .hero {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: linear-gradient(135deg, #e0f7fa, #80deea);
-        padding: 50px;
-        border-radius: 20px;
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        animation: fadeIn 1.5s ease-in-out;
-      }
-
-      .hero-copy h1 {
-        font-size: 2.5rem;
-        color: #00796b;
-        margin-bottom: 15px;
-      }
-
-      .hero-copy p {
-        font-size: 1rem;
-        color: #004d40;
-        margin-bottom: 15px;
-      }
-
-      .hero-image {
-        max-width: 350px;
-        animation: float 3s ease-in-out infinite;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      @keyframes float {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-      }
-    </style>
 
     <section class="features">
       <div class="feature-card">
@@ -144,6 +96,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>

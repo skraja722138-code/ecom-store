@@ -13,6 +13,26 @@ const viewProductsButton = document.getElementById('view-products');
 const logoutButton = document.getElementById('logout-button');
 const productList = document.getElementById('product-list');
 
+const productSource = './data/products.json';
+const fallbackProducts = [
+  {
+    id: 'p1',
+    name: 'Classic Sneakers',
+    category: 'Fashion',
+    price: 499,
+    description: 'Comfortable shoes for daily wear.',
+    imageUrl: './uploads/sample-sneakers.svg'
+  },
+  {
+    id: 'p2',
+    name: 'Leather Wallet',
+    category: 'Accessories',
+    price: 299,
+    description: 'Premium wallet with card slots and a coin pocket.',
+    imageUrl: './uploads/sample-wallet.svg'
+  }
+];
+
 let products = [];
 let cart = [];
 let activeCategory = 'All';
@@ -48,6 +68,25 @@ function createToastContainer() {
   return container;
 }
 
+function resolveAssetPath(value) {
+  if (!value) return './uploads/default-product.svg';
+  if (/^(https?:|data:)/i.test(value)) return value;
+  return value.startsWith('/') ? `.${value}` : value;
+}
+
+function saveProducts(productsToSave) {
+  localStorage.setItem('martnowProducts', JSON.stringify(productsToSave));
+}
+
+function getStoredProducts() {
+  try {
+    const raw = localStorage.getItem('martnowProducts');
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
 function saveCart() {
   try {
     localStorage.setItem('martnowCart', JSON.stringify(cart));
@@ -79,7 +118,7 @@ function renderCart() {
     const row = document.createElement('div');
     row.className = 'cart-item';
     row.innerHTML = `
-      <img src="${item.imageUrl || '/uploads/default-product.svg'}" alt="${item.name}" />
+      <img src="${resolveAssetPath(item.imageUrl)}" alt="${item.name}" />
       <div>
         <p class="cart-item-title">${item.name}</p>
         <p class="cart-item-meta">₹${Number(item.price || 0).toFixed(2)} each</p>
@@ -204,7 +243,7 @@ function createProductCard(product) {
   card.className = 'product-card';
   card.innerHTML = `
     <span class="tag">${product.category || 'General'}</span>
-    <img src="${product.imageUrl || '/uploads/default-product.svg'}" alt="${product.name}" />
+    <img src="${resolveAssetPath(product.imageUrl || './uploads/default-product.svg')}" alt="${product.name}" />
     <h3>${product.name}</h3>
     <p>${product.description || 'Fresh quality product from the catalog.'}</p>
     <div class="price">₹${Number(product.price || 0).toFixed(2)}</div>
@@ -263,13 +302,30 @@ function renderCategories() {
 }
 
 async function loadProducts() {
+  const storedProducts = getStoredProducts();
+  if (storedProducts && Array.isArray(storedProducts)) {
+    products = storedProducts;
+    renderCategories();
+    filterProducts();
+    updateCartSummary();
+    return;
+  }
+
   try {
-    const response = await fetch('/api/products');
-    products = await response.json();
+    const response = await fetch(productSource, { cache: 'no-store' });
+    const data = await response.json();
+    products = Array.isArray(data) && data.length ? data : fallbackProducts;
+    saveProducts(products);
     renderCategories();
     filterProducts();
   } catch (error) {
-    showToast('Unable to load products right now.', 'error');
+    products = fallbackProducts;
+    saveProducts(products);
+    renderCategories();
+    filterProducts();
+    showToast('Using the built-in demo catalog.', 'info');
+  } finally {
+    updateCartSummary();
   }
 }
 
@@ -277,12 +333,10 @@ function logoutUser() {
   localStorage.removeItem('martnowUser');
   localStorage.removeItem('adminPassword');
   localStorage.removeItem('martnowCart');
-  window.location.href = '/';
+  window.location.href = './index.html';
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  // Allow anonymous visitors to view products. If no user is set, treat as 'user' for UI state.
-  const currentUser = localStorage.getItem('martnowUser') || 'user';
   if (!localStorage.getItem('martnowUser')) localStorage.setItem('martnowUser', 'user');
 
   loadProducts();
@@ -324,12 +378,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initialize default view as user
   showUserPanel();
   setActiveButton('user');
 });
 
-// Toggle between user and admin views
 const btnAdmin = document.getElementById('btn-admin-panel');
 const btnUser = document.getElementById('btn-user-panel');
 
@@ -357,19 +409,15 @@ function showAdminPanel() {
 }
 
 if (btnAdmin) btnAdmin.addEventListener('click', () => {
-  // Navigate to the dedicated admin page
-  window.location.href = '/admin';
+  window.location.href = './admin.html';
 });
 if (btnUser) btnUser.addEventListener('click', showUserPanel);
 
-// Listen for admin login/logout events from other tabs
 window.addEventListener('storage', (event) => {
   if (event.key === 'adminPassword') {
     if (event.newValue) {
-      // Admin logged in
       showAdminPanel();
     } else {
-      // Admin logged out
       showUserPanel();
     }
   }

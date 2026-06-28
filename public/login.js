@@ -29,49 +29,48 @@ function createToastContainer() {
 function navigateToUser() {
   localStorage.setItem('martnowUser', 'user');
   localStorage.removeItem('adminPassword');
-  window.location.href = '/user.html';
+  window.location.href = './user.html';
 }
 
 function navigateToAdmin() {
   localStorage.setItem('martnowUser', 'admin');
-  window.location.href = '/admin.html';
+  localStorage.setItem('adminPassword', 'admin123');
+  window.location.href = './admin.html';
 }
 
-userLoginForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const password = document.getElementById('user-password').value.trim();
-  const email = document.getElementById('user-email').value.trim();
+if (userLoginForm) {
+  userLoginForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const password = document.getElementById('user-password').value.trim();
+    const email = document.getElementById('user-email').value.trim();
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password !== 'user123') {
-    showToast('Please use the demo credentials: user@example.com / user123', 'error');
-    return;
-  }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password !== 'user123') {
+      showToast('Please use the demo credentials: user@example.com / user123', 'error');
+      return;
+    }
 
-  showToast('Welcome back! Your customer dashboard is loading.', 'success');
-  navigateToUser();
-});
-
-adminLoginForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const password = document.getElementById('admin-password').value.trim();
-
-  if (!password) {
-    showToast('Enter your admin password to continue.', 'error');
-    return;
-  }
-
-  const response = await fetch('/api/admin/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ password })
+    showToast('Welcome back! Your customer dashboard is loading.', 'success');
+    navigateToUser();
   });
+}
 
-  if (response.ok) {
-    localStorage.setItem('adminPassword', password);
-    showToast('Admin access granted.', 'success');
-    navigateToAdmin();
-  } else {
-    localStorage.removeItem('adminPassword');
-    showToast('Invalid admin password. Use admin123.', 'error');
-  }
-});
+if (adminLoginForm) {
+  adminLoginForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const password = document.getElementById('admin-password').value.trim();
+
+    if (!password) {
+      showToast('Enter your admin password to continue.', 'error');
+      return;
+    }
+
+    if (password === 'admin123') {
+      localStorage.setItem('adminPassword', password);
+      showToast('Admin access granted.', 'success');
+      navigateToAdmin();
+    } else {
+      localStorage.removeItem('adminPassword');
+      showToast('Invalid admin password. Use admin123.', 'error');
+    }
+  });
+}

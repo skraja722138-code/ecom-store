@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MartNow | Admin Dashboard</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <header class="site-header admin-header">
@@ -14,7 +14,7 @@
         <p class="subheading">Manage products, images, and inventory without code changes.</p>
       </div>
       <div class="header-actions">
-        <a class="button button-secondary" href="/user.html">View Store</a>
+        <a class="button button-secondary" href="./user.html">View Store</a>
         <button id="logout-admin-button" class="button button-secondary" type="button">Logout</button>
       </div>
     </div>
@@ -39,7 +39,7 @@
             <textarea name="description" rows="4" placeholder="Product description"></textarea>
 
             <label>Product Image</label>
-            <input type="file" name="image" accept="image/*" capture="environment" />
+            <input type="file" name="image" accept="image/*" />
 
             <button type="submit" class="button button-primary">Add Product</button>
           </form>
@@ -71,6 +71,6 @@
     </div>
   </footer>
 
-  <script src="admin.js"></script>
+  <script src="./admin.js"></script>
 </body>
 </html>
