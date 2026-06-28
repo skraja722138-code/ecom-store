@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+  <rect width="600" height="450" fill="#eff6ff" />
+  <g transform="translate(100 100)">
+    <path d="M30 150c20-80 140-90 220-80s140 50 160 90" fill="#93c5fd" stroke="#2563eb" stroke-width="12" />
+    <path d="M150 170c50-18 130-8 160 10" fill="none" stroke="#1e40af" stroke-width="16" stroke-linecap="round" />
+    <circle cx="160" cy="210" r="22" fill="#1d4ed8" />
+    <circle cx="280" cy="220" r="22" fill="#1d4ed8" />
+  </g>
+  <text x="300" y="390" text-anchor="middle" fill="#1e3a8a" font-size="32" font-family="Arial, sans-serif">Classic Sneakers</text>
+</svg>
