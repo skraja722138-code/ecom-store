@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+  <rect width="600" height="450" fill="#f8fafc" />
+  <rect x="110" y="130" width="380" height="180" rx="36" ry="36" fill="#fde68a" stroke="#d97706" stroke-width="12" />
+  <rect x="160" y="150" width="280" height="120" rx="24" ry="24" fill="#f59e0b" />
+  <circle cx="460" cy="210" r="24" fill="#b45309" />
+  <text x="300" y="380" text-anchor="middle" fill="#92400e" font-size="32" font-family="Arial, sans-serif">Leather Wallet</text>
+</svg>

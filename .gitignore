@@ -1,5 +1,5 @@
 node_modules/
-data/
+/data/
 public/uploads/*.jpg
 public/uploads/*.jpeg
 public/uploads/*.png

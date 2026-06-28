@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Now | Premium Bakery Product</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./index.html">Shop Now</a>
+      <nav class="main-nav">
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <button type="button" id="btn-user-panel" class="button button-secondary">User Panel</button>
+        <button type="button" id="btn-admin-panel" class="button button-secondary">Admin Panel</button>
+      </nav>
+      <button class="button button-primary" id="view-cart-button">Cart <span id="cart-count">0</span></button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="user-view">
+      <section id="categories" class="section-heading">
+        <div class="section-title">
+          <h2>Shop by category</h2>
+        </div>
+        <div class="category-list" id="category-list"></div>
+      </section>
+
+      <section id="products" class="section-heading">
+        <div class="section-title">
+          <h2>Top trending products</h2>
+          <p>Handpicked items updated from the admin dashboard.</p>
+        </div>
+        <div id="product-list" class="product-grid"></div>
+      </section>
+    </section>
+
+    <section id="admin-view" class="hidden">
+      <section class="card admin-card">
+        <h2>Admin Panel</h2>
+        <p>Open the dedicated admin page to add products and manage the catalog.</p>
+        <a class="button button-primary" href="./admin.html">Go to Admin</a>
+      </section>
+    </section>
+  </main>
+
+  <aside class="cart-panel hidden" id="cart-panel">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="button button-secondary" id="close-cart">Close</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total">Total: <span id="cart-total">₹0.00</span></div>
+      <button class="button button-primary" id="checkout-button">Checkout</button>
+    </div>
+  </aside>
+
+  <div class="cart-backdrop hidden" id="cart-backdrop"></div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>SHOP NOW</h4>
+        <p>Thank you for shopping with us.</p>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <p>Email: skraja722138@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>

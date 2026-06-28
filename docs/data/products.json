@@ -1,0 +1,18 @@
+[
+  {
+    "id": "p1",
+    "name": "Classic Sneakers",
+    "category": "Fashion",
+    "price": 499,
+    "description": "Comfortable shoes for daily wear.",
+    "imageUrl": "./uploads/sample-sneakers.svg"
+  },
+  {
+    "id": "p2",
+    "name": "Leather Wallet",
+    "category": "Accessories",
+    "price": 299,
+    "description": "Premium wallet with card slots and a coin pocket.",
+    "imageUrl": "./uploads/sample-wallet.svg"
+  }
+]

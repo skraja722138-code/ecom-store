@@ -1,25 +1,25 @@
 # MartNow / ShopFront E-commerce Website
 
-This project is a Node.js + Express e-commerce demo that supports product listings, admin product creation, and image uploads.
+This project now includes a free GitHub Pages-compatible static version of the store.
 
-## Run locally
+## Free Hosting with GitHub Pages
 
-```bash
-npm install
-npm start
-```
+The static site is served from the `docs/` folder.
 
-Then open http://localhost:3002
+1. Go to your repository Settings → Pages.
+2. Set the branch to `main` and the folder to `/docs`.
+3. Save.
 
-## Deploy to Render
+After a short build, your site will be available at:
 
-1. Push this project to GitHub.
-2. Create a new Render Web Service and connect the GitHub repository.
-3. Render will detect the included render.yaml file.
-4. Your app will be available at a public Render URL that your phone can open.
+`https://skraja722138-code.github.io/ecom-store/`
 
 ## Notes
 
-- The app stores product data in data/products.json.
-- Image uploads are stored under public/uploads.
-- GitHub Pages cannot host this full app because it needs a Node server. Use Render, Railway, Fly.io, or a VPS for the complete experience.
+- The free GitHub Pages version uses `docs/data/products.json` for the product catalog.
+- Product changes and image uploads are stored locally in the browser, not on a server.
+- The original Node.js server is still in the repo, but the Pages deployment works without it.
+
+## Run locally
+
+To preview the static site in a local browser, open `docs/index.html`.
