@@ -81,7 +81,10 @@ function saveProducts(productsToSave) {
 function getStoredProducts() {
   try {
     const raw = localStorage.getItem('martnowProducts');
-    return raw ? JSON.parse(raw) : null;
+    const parsed = raw ? JSON.parse(raw) : null;
+    // Treat an empty array as "no stored products" so the bundled catalog can load
+    if (Array.isArray(parsed) && parsed.length === 0) return null;
+    return parsed;
   } catch (error) {
     return null;
   }
